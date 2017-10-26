@@ -49,13 +49,65 @@ const gemHeapSkope = function () { // No parameter needed
 			the gem mine, but make sure you stop when there
 			are no minerals left.
 			*/
-			if ( GemMine.requestedMineral.kilograms >= 5 ) {
-				GemMine.requestedMineral.kilograms = GemMine.requestedMineral.kilograms - 5
-			}
+			if (requestedMineral === "Onyx") {
 
-			return {
-				"mineral": requestedMineral,
-				"amount": GemMine.requestedMineral.kilograms
+
+				if (GemMine.Onyx.kilograms >= 5) {
+					GemMine.Onyx.kilograms = GemMine.Onyx.kilograms - 5
+
+					return {
+						"mineral": requestedMineral,
+						"amount": 5
+					}
+				} else {
+					return {
+						"mineral": requestedMineral,
+						"amount": 0
+					}
+				}
+			} else if (requestedMineral === "Amethyst") {
+				if (GemMine.Amethyst.kilograms >= 5) {
+					GemMine.Amethyst.kilograms = GemMine.Amethyst.kilograms - 5
+
+					return {
+						"mineral": requestedMineral,
+						"amount": 5
+					}
+				} else {
+					return {
+						"mineral": requestedMineral,
+						"amount": 0
+					}
+				}
+			} else if (requestedMineral === "Bloodstone") {
+				if (GemMine.Bloodstone.kilograms >= 5) {
+					GemMine.Bloodstone.kilograms = GemMine.Bloodstone.kilograms - 5
+
+					return {
+						"mineral": requestedMineral,
+						"amount": 5
+					}
+				} else {
+					return {
+						"mineral": requestedMineral,
+						"amount": 0
+					}
+				}
+			} else if (requestedMineral === "Emerald") {
+				if (GemMine.Emerald.kilograms >= 5) {
+					GemMine.Emerald.kilograms = GemMine.Emerald.kilograms - 5
+
+					return {
+						"mineral": requestedMineral,
+						"amount": 5
+					}
+				} else {
+					return {
+						"mineral": requestedMineral,
+						"amount": 0
+					}
+				}
+
 			}
 		}
 	}
@@ -70,42 +122,47 @@ const SkopeManager = gemHeapSkope()
 const storageContainers = ContainerGenerator()
 
 let containerNum = 1
+let currentContainer = {}
 
-while(SkopeManager.Onyx.kilograms > 0)
-{
-	SkopeManager.process(Onyx)
-	storageContainers.gems.push(Onyx)
-	if(storageContainers[containerNum].gems.length === 113)
-	{
-		containerNum++
-	}
-}
-while (SkopeManager.Amethyst.kilograms > 0)
-{
-	SkopeManager.process(Amethyst)
-	storageContainers.gems.push(Amethyst)
-	if(storageContainers[containerNum].gems.length === 113)
-	{
-		containerNum++
-	}
-}
-	
-while (SkopeManager.Bloodstone.kilograms > 0)
-{
-	SkopeManager.process(Bloodstone)
-	storageContainers.gems.push(Bloodstone)
-	if(storageContainers[containerNum].gems.length === 113)
-	{
+while (SkopeManager.process("Onyx").amount === 5) {
+	currentContainer = storageContainers.filter(container => {
+		const isCurrent = (container.id === containerNum)
+		return isCurrent
+	})
+	currentContainer[0].gems.push("Onyx")
+	if (currentContainer[0].gems.length === 113) {
 		containerNum++
 	}
 }
 
-while (SkopeManager.Emerald.kilograms > 0)
-{
-	SkopeManager.process(Emerald)
-	storageContainers.gems.push(Emerald)
-	if(storageContainers[containerNum].gems.length === 113)
-	{
+while (SkopeManager.process("Amethyst").amount === 5) {
+	currentContainer = storageContainers.filter(container => {
+		const isCurrent = (container.id === containerNum)
+		return isCurrent
+	})
+	currentContainer[0].gems.push("Amethyst")
+	if (currentContainer[0].gems.length === 113) {
+		containerNum++
+	}
+}
+
+while (SkopeManager.process("Bloodstone").amount === 5) {
+	currentContainer = storageContainers.filter(container => {
+		const isCurrent = (container.id === containerNum)
+		return isCurrent
+	})
+	currentContainer[0].gems.push("Bloodstone")
+	if (currentContainer[0].gems.length === 113) {
+		containerNum++
+	}
+}
+while (SkopeManager.process("Emerald").amount === 5) {
+	currentContainer = storageContainers.filter(container => {
+		const isCurrent = (container.id === containerNum)
+		return isCurrent
+	})
+	currentContainer[0].gems.push("Emerald")
+	if (currentContainer[0].gems.length === 113) {
 		containerNum++
 	}
 }
