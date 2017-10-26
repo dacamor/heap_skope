@@ -75,55 +75,37 @@ The SkopeManager variable represents the object with the
 */
 const SkopeManager = gemHeapSkope()
 
-const storageContainers = ContainerGenerator()
+const storageContainers = ContainerGenerator(30)	//array of available containers.  Parameter determines num of containers
 
-let containerNum = 1
-let currentContainer = {}
+let containerNum = 1			//id of current container
+let currentContainer = {}		//current container
 let processedGems = SkopeManager.processMine()
 
+//Continue processing while there are more gems left.  processedGems.amount === 0 when the mine is empty
 while (processedGems.amount === 5) {
+	//Get currentContainer
 	currentContainer = storageContainers.filter(container => {
 		const isCurrent = (container.id === containerNum)
 		return isCurrent
-	})
-	currentContainer[0].gems.push(processedGems.mineral)
+	})[0]
+
+	//Add processed material to container
+	currentContainer.gems.push(processedGems.mineral)
+
+	//If container is full, increment to next container
 	if (currentContainer[0].gems.length === 113) {
 		containerNum++
 	}
+	//If out of containers, stop execution
+	if (containerNum > storageContainers.length)
+	{
+		break;
+	}
+
+	//get next processed gem
 	processedGems = SkopeManager.processMine()
 }
 
-// while (SkopeManager.process("Amethyst").amount === 5) {
-// 	currentContainer = storageContainers.filter(container => {
-// 		const isCurrent = (container.id === containerNum)
-// 		return isCurrent
-// 	})
-// 	currentContainer[0].gems.push("Amethyst")
-// 	if (currentContainer[0].gems.length === 113) {
-// 		containerNum++
-// 	}
-// }
-
-// while (SkopeManager.process("Bloodstone").amount === 5) {
-// 	currentContainer = storageContainers.filter(container => {
-// 		const isCurrent = (container.id === containerNum)
-// 		return isCurrent
-// 	})
-// 	currentContainer[0].gems.push("Bloodstone")
-// 	if (currentContainer[0].gems.length === 113) {
-// 		containerNum++
-// 	}
-// }
-// while (SkopeManager.process("Emerald").amount === 5) {
-// 	currentContainer = storageContainers.filter(container => {
-// 		const isCurrent = (container.id === containerNum)
-// 		return isCurrent
-// 	})
-// 	currentContainer[0].gems.push("Emerald")
-// 	if (currentContainer[0].gems.length === 113) {
-// 		containerNum++
-// 	}
-// }
 /*
 Create 30 storage containers, which is how many a hëap-skope
 is equipped with.

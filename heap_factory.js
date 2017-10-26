@@ -1,6 +1,6 @@
-const ContainerGenerator = function () {
+const ContainerGenerator = function (max = 30) {
     let currentContainer = 1
-    const maximumContainers = 30
+    const maximumContainers = max
     let result = []
 
     while (currentContainer <= maximumContainers) {
