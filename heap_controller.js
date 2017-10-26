@@ -93,7 +93,8 @@ while (processedGems.amount === 5) {
 	currentContainer.gems.push(processedGems.mineral)
 
 	//If container is full, increment to next container
-	if (currentContainer[0].gems.length === 113) {
+	//A container holds 565 kg of gems
+	if (currentContainer.gems.length === 113) {
 		containerNum++
 	}
 	//If out of containers, stop execution
