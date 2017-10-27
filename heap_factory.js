@@ -10,3 +10,11 @@ const ContainerGenerator = function (max = 30) {
 
     return result
 }
+const logContainerGenerator = function* () {
+    let currentContainer = 1
+
+    while (true) {
+        yield { "id": currentContainer, "type": "Log", "logs": [] }
+        currentContainer++
+    }
+}
